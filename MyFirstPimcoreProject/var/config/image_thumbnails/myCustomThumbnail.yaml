@@ -1,0 +1,27 @@
+pimcore:
+    assets:
+        image:
+            thumbnails:
+                definitions:
+                    myCustomThumbnail:
+                        items:
+                            -
+                                method: resize
+                                arguments:
+                                    width: 300
+                                    height: 500
+                        medias: {  }
+                        name: myCustomThumbnail
+                        description: 'Resize image to 300 * 500 px'
+                        group: ''
+                        format: SOURCE
+                        quality: 85
+                        highResolution: null
+                        preserveColor: false
+                        forceProcessICCProfiles: false
+                        preserveMetaData: false
+                        rasterizeSVG: false
+                        downloadable: false
+                        modificationDate: 1767553007
+                        creationDate: 1767552218
+                        preserveAnimation: false
