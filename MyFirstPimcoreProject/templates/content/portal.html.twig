@@ -1,0 +1,19 @@
+{% extends 'layouts/base.html.twig'%}
+
+{% do pimcore_head_title('Portal') %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>{{ pimcore_input('headline')}}</h1>
+        <div class = "fs-5 mb-4">
+            <p>{{ pimcore_wysiwyg('content') }}</p>
+            <p>
+                <strong> {{ pimcore_textarea('description') }}</strong>
+            </p>
+        </div>
+        <div>
+            {{ pimcore_link('Button1',{'class':'btn btn-primary'}) }}
+            {{ pimcore_link('Button2',{'class':'btn btn-secondary'}) }}
+        </div>
+    </div>
+{% endblock %}
