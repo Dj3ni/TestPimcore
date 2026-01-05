@@ -59,6 +59,14 @@ services:
         resource: '../src/Command/*'
         tags: [ 'console.command' ]
 
+    #
+    # OTHER SERVICES
+    #
+    App\Repository\:
+        resource: '../src/Repository'
+        public: true
+        tags: [ 'doctrine.repository_service' ]
+
 
 
     # Example custom templating helper
