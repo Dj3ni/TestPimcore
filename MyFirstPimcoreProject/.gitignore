@@ -18,6 +18,8 @@
 !config/local/.gitkeep
 /config/pimcore/*-private-key.json.example
 
+/cache/*
+
 /var/*
 !/var/.gitkeep
 !/var/classes/
