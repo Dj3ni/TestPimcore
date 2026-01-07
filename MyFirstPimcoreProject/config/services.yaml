@@ -59,6 +59,16 @@ services:
         resource: '../src/Command/*'
         tags: [ 'console.command' ]
 
+    simple_auth.security.user_provider:
+        class: Pimcore\Security\User\ObjectUserProvider
+        arguments: ['App\Model\DataObject\User', 'username']
+
+    simple_auth.security.password_hasher_factory:
+        class: Pimcore\Security\Hasher\Factory\UserAwarePasswordHasherFactory
+        arguments:
+            - Pimcore\Security\Hasher\PasswordFieldHasher
+            - ['password']
+
     #
     # OTHER SERVICES
     #
@@ -66,9 +76,8 @@ services:
         resource: '../src/Repository'
         public: true
         tags: [ 'doctrine.repository_service' ]
-
-
-
+    
+    
     # Example custom templating helper
     # App\Templating\Helper\Example:
     #     # templating helpers need to be public as they

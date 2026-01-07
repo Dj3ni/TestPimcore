@@ -1,11 +1,30 @@
+pimcore:
+    security:
+        password_hasher_factories:
+            App\Model\DataObject\User: simple_auth.security.password_hasher_factory
+
 security:
     enable_authenticator_manager: true
 
     providers:
         pimcore_admin:
             id: Pimcore\Security\User\UserProvider
+        simple_auth_app_provider:
+            id: simple_auth.security.user_provider
 
     firewalls:
+        simple_auth_app:
+            pattern: ^/auth
+            provider: simple_auth_app_provider
+            form_login:
+                login_path: simple_auth_login
+                check_path: simple_auth_login
+                default_target_path: app_home
+            logout:
+                path: simple_auth_logout
+                target: /auth/login
+                invalidate_session: false
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -20,6 +39,11 @@ security:
         pimcore_admin: '%pimcore_admin_bundle.firewall_settings%'
 
     access_control:
+        - { path: ^/auth/login, roles: PUBLIC_ACCESS }
+        - { path: ^/auth/register, roles: PUBLIC_ACCESS }
+        - { path: ^/auth/logout, roles: ROLE_USER }
+
+
         # Pimcore admin ACl  // DO NOT CHANGE!
         - { path: ^/admin/settings/display-custom-logo, roles: PUBLIC_ACCESS }
         - { path: ^/admin/login/2fa-verify, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
