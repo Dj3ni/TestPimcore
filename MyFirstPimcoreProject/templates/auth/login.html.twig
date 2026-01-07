@@ -14,7 +14,21 @@
 
                 <h1 class="h3 mb-3 fw-normal">Pimcorecasts <br> Auth Login</h1>
 
-                <div class= "alert alert-danger">{{error}}</div>
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
 
                 <div class="form-floating">
                     <input type="email" name="_username" class="form-control" id="floating-email" placeholder="name@example.com">
