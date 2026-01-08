@@ -10,7 +10,7 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="{{ path('cats') }}">Cats</a>
             </li>
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,6 +26,20 @@
             <li class="nav-item">
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
             </li>
+        </ul>
+        <ul class="navbar-nav mx-5 mb-2 mb-lg-0">
+        {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('simple_auth_logout') }}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('simple_auth_login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('simple_auth_register') }}">Register</a>
+                </li>
+            {% endif %} 
         </ul>
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>

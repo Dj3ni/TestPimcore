@@ -19,7 +19,7 @@ security:
             form_login:
                 login_path: simple_auth_login
                 check_path: simple_auth_login
-                default_target_path: app_home
+                default_target_path: dashboard
             logout:
                 path: simple_auth_logout
                 target: /auth/login

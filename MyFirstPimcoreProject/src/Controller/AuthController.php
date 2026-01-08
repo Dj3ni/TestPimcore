@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 #[Route('/auth', name: 'simple_auth_')]
 class AuthController extends FrontendController
@@ -34,7 +36,14 @@ class AuthController extends FrontendController
     }
 
     #[Route('/register', name: 'register')]
-    public function register(Request $req): Response
+    public function register(
+        Request $req,
+        UserAuthenticatorInterface $userAuthenticator,
+        #[\Symfony\Component\DependencyInjection\Attribute\Autowire(
+        service: 'security.authenticator.form_login.simple_auth_app'
+    )]
+    $authenticator
+    ): Response
     {
         // dd($req);
         if($req->get('Register')) {
@@ -71,8 +80,13 @@ class AuthController extends FrontendController
             $user->save();
 
             $this->addFlash('success', 'Registration successful');
-            return $this->redirectToRoute('simple_auth_login');
-        
+
+            // Authenticate the user after registration and redirect to homepage
+            return $userAuthenticator->authenticateUser(
+                $user,
+                $authenticator,
+                $req
+            );
         }
 
         return $this->render('auth/register.html.twig', [
