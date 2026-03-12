@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <h1>Cat Index Page</h1>
+    <p>Welcome to the cat index page!</p>
+    <button><a href="{{ path('add_cat') }}">Add a cat</a></button>
+    
+    {% for cat in cats %}
+        <div class="cat-item">
+            <h2>{{ cat.name }}</h2>
+            <p>Age: {{ cat.age }}</p>
+            <p>Breed: {{ cat.breed }}</p>
+        </div>
+    {% else %}
+        <p>No cats found.</p>
+    {% endfor %}
+
+{% endblock %}

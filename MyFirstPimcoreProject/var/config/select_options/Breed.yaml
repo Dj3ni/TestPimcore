@@ -1,0 +1,10 @@
+pimcore:
+    objects:
+        select_options:
+            definitions:
+                Breed:
+                    id: Breed
+                    group: null
+                    useTraits: ''
+                    implementsInterfaces: ''
+                    selectOptions: {  }
